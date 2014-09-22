@@ -12,7 +12,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    printf("Testando o GIT");
+    printf("Testando o GIT 2.");
     return (EXIT_SUCCESS);
 }
 
