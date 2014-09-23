@@ -11,8 +11,16 @@
 /*
  * 
  */
+
+typedef struct {
+    int matrix[4][4];
+    int g;
+    int h;
+    tNo p;
+}tNo;
+
 int main(int argc, char** argv) {
-    printf("Testando o GIT 2.");
+    FILE *fileInput = fopen(argv[1],"r");
     return (EXIT_SUCCESS);
 }
 
