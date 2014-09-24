@@ -4,11 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
+      <itemPath>definicoes.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
                    projectFiles="true">
+      <itemPath>heuristicas.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>util.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Arquivos de Recurso"
@@ -36,7 +39,13 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="definicoes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="heuristicas.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="util.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -59,7 +68,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="definicoes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="heuristicas.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="util.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>

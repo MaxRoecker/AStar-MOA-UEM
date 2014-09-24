@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "definicoes.h"
+
 
 /*
  * 
@@ -67,6 +69,10 @@ int main(int argc, char** argv) {
         }
         printf("\n");
     }
+    
+    
+    
+    
     return (EXIT_SUCCESS);
 }
 
