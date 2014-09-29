@@ -21,6 +21,3 @@ int h1(int m[4][4]) {
     return counter;
 }
 
-int h2(int[4][4]){
-    
-}

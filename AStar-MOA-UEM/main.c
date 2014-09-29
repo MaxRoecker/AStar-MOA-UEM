@@ -10,18 +10,6 @@
 #include "definicoes.h"
 
 
-/*
- * 
- */
-#define LENMATRIX 4
-
-typedef struct {
-    int matrix[LENMATRIX][LENMATRIX];
-    int g;
-    int h;
-    struct tNo *p;
-} tNo;
-
 int readNumberFromFile(FILE *fileInput) {
     char c;
     fread(&c, 1, sizeof (char), fileInput);
@@ -38,7 +26,7 @@ int readNumberFromFile(FILE *fileInput) {
     return atoi(buffer);
 }
 
-void readMatrix(FILE *fileInput, tNo *root) {
+void readMatrix(FILE *fileInput, tNodeBoard *root) {
     int i;
     int j;
     for (i = 0; i < LENMATRIX; i++) {
@@ -59,7 +47,7 @@ int main(int argc, char** argv) {
     gets(fileName);
     FILE *fileInput = fopen(fileName,"r");
     
-    tNo root;
+    tNodeBoard root;
     int i;
     int j;
     readMatrix(fileInput, &root);
@@ -70,8 +58,33 @@ int main(int argc, char** argv) {
         printf("\n");
     }
     
+    tQueue queue;
+    initialize(&queue);
+    tNodeQueue node1;
+    tNodeBoard e1;
+    node1.elem = &e1;
+    node1.elem->f = 5;
+    insertAtEnd(&queue, node1);
+    printf("tamanho: %d\n",queue.length);
+    printf("%d\n",queue.begin->elem->f);
+    tNodeQueue node2;
+    tNodeBoard e2;
+    node2.elem = &e2;
+    node2.elem->f = 6;
+    insertAtEnd(&queue, node2);
+    printf("tamanho: %d\n",queue.length);
+    printf("%d\n",queue.begin->elem->f);
+    tNodeQueue node3;
+    tNodeBoard e3;
+    node3.elem = &e3;
+    node3.elem->f = 7;
+    insertAtEnd(&queue, node3);
+    printf("tamanho: %d\n",queue.length);
+    printf("%d\n",queue.begin->elem->f);
     
-    
+//    tNodeQueue min;
+//    removeMin(&queue,&min);
+//    printf("\n\n%d",min.elem->f);
     
     return (EXIT_SUCCESS);
 }
