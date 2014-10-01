@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/a-star.o \
 	${OBJECTDIR}/heuristicas.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/queue.o \
@@ -64,6 +65,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/astar-moa-uem: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/astar-moa-uem ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/a-star.o: a-star.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/a-star.o a-star.c
 
 ${OBJECTDIR}/heuristicas.o: heuristicas.c 
 	${MKDIR} -p ${OBJECTDIR}
