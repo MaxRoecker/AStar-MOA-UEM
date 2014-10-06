@@ -15,8 +15,8 @@
 int h1(int m[LENMATRIX][LENMATRIX]) {
     int i;
     int counter = 0;
+    int j;
     for (i = 0; i < LENMATRIX; i++) {
-        int j;
         for (j = 0; j < LENMATRIX; j++) {
             if (m[i][j] != (i + LENMATRIX * j + 1)) {
                 if (!((m[i][j] == 0))) {
@@ -98,24 +98,23 @@ int h4(int m[LENMATRIX][LENMATRIX], double p1, double p2, double p3) {
  * Retorna o maior valor das heurísticas 1, 2 e 3.
  */
 
-int h5(int m[LENMATRIX][LENMATRIX]){
+int h5(int m[LENMATRIX][LENMATRIX]) {
     int answer;
     int r1 = h1(m);
     int r2 = h2(m);
     int r3 = h3(m);
-    if(r1 > r2){
-        if(r1 > r3){
+    if (r1 > r2) {
+        if (r1 > r3) {
             answer = r1;
-        }
-        else {
+        } else {
             answer = r3;
         }
-    }else{
-        if(r2 > r3){
+    } else {
+        if (r2 > r3) {
             answer = r2;
-        }else{
+        } else {
             answer = r3;
         }
     }
-    return answer;    
+    return answer;
 }

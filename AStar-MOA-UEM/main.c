@@ -42,113 +42,69 @@ void readMatrix(FILE *fileInput, tNodeBoard *root) {
 int main(int argc, char** argv) {
     //FILE *fileInput = fopen(argv[1],"r");
 
-    /*
-        char fileName[50];
-        printf("Informe o nome do arquivo: ");
-        gets(fileName);
-        FILE *fileInput = fopen(fileName,"r");
-    
-        tNodeBoard root;
-        int i;
-        int j;
-        readMatrix(fileInput, &root);
-        for (i = 0; i < 4; i++){
-            for (j=0; j < 4; j++){
-                printf("%d ",root.matrix[i][j]);
-            }
-            printf("\n");
-        }
-    
-        tQueue queue;
-        initialize(&queue);
-        tNodeQueue node1;
-        tNodeBoard e1;
-        node1.elem = &e1;
-        node1.elem->f = 5;
-        insertAtEnd(&queue, node1);
-        printf("tamanho: %d\n",queue.length);
-        printf("%d\n",queue.begin->elem->f);
-        tNodeQueue node2;
-        tNodeBoard e2;
-        node2.elem = &e2;
-        node2.elem->f = 6;
-        insertAtEnd(&queue, node2);
-        printf("tamanho: %d\n",queue.length);
-        printf("%d\n",queue.begin->elem->f);
-        tNodeQueue node3;
-        tNodeBoard e3;
-        node3.elem = &e3;
-        node3.elem->f = 7;
-        insertAtEnd(&queue, node3);
-        printf("tamanho: %d\n",queue.length);
-        printf("%d\n",queue.begin->elem->f);
-    
-    //    tNodeQueue min;
-    //    removeMin(&queue,&min);
-    //    printf("\n\n%d",min.elem->f);*/
 
-    int m0[LENMATRIX][LENMATRIX] = {
-        {1, 5, 9, 13},
-        {2, 6, 10, 14},
-        {3, 0, 11, 15},
-        {4, 8, 12, 7}};
+    //char fileName[50];
+//    char buffer;
+//    printf("Informe o nome do arquivo: ");
+//    gets(fileName);
+//    scanf("%c",buffer);
+    char fileName[50] = "caso1.txt";
+    FILE *fileInput = fopen(fileName, "r");
+    
+    printf("\n\n[1] Heuristica 1 \n");
+    printf("[2] Heuristica 2 \n");
+    printf("[3] Heuristica 3 \n");
+    printf("[4] Heuristica 4 \n");
+    printf("[5] Heuristica 5 \n");
+    printf("Informe a heuristica: ");
 
-    /*
-        printf("H1: %d \n",h1(m0));
-        printf("H2: %d \n",h2(m0));
-        printf("H3: %d \n",h3(m0));
-        printf("H4: %d \n",h4(m0,0.3,0.3,0.4));
-        printf("H5: %d \n\n",h5(m0));
-     */
+    int heuristica = 1;
+    //scanf("%d",&heuristica);
     
-    int *top = malloc(sizeof(m0));
-    int *right = malloc(sizeof(m0));
-    int *bottom = malloc(sizeof(m0));
-    int *left = malloc(sizeof(m0));
-    int i,j;
-    
-    findZeroPosition(m0,&i,&j);
-    
-    if(moveTop(m0,top,i,j)){
-        printMatrix(top);
-    }else{
-        printf("Não deu.");
+    if (heuristica == 4){
+        printf("\nInforme o peso para a heuristica 1: ");
+        scanf("%lf",&p1);
+        printf("\nInforme o peso para a heuristica 2: ");
+        scanf("%lf",&p2);
+        printf("\nInforme o peso para a heuristica 3: ");
+        scanf("%lf",&p3);
     }
-    printf("\n\n");
-    if(moveRight(m0,right,i,j)){
-        printMatrix(right);
-    }else{
-        printf("Não deu.");
+
+    tNodeBoard *initBoard = malloc(sizeof(tNodeBoard));
+    readMatrix(fileInput, initBoard);
+    initBoard->p = NULL;
+    initBoard->g = 0;
+    switch (heuristica) {
+        case 1:
+            initBoard->h = h1(initBoard->matrix);
+            break;
+        case 2:
+            initBoard->h = h2(initBoard->matrix);
+            break;
+        case 3:
+            initBoard->h = h3(initBoard->matrix);
+            break;
+        case 4:
+            initBoard->h = h4(initBoard->matrix, p1, p2, p3);
+            break;
+        case 5:
+            initBoard->h = h5(initBoard->matrix);
+            break;
+
     }
-    printf("\n\n");
-    if(moveBottom(m0,bottom,i,j)){
-        printMatrix(bottom);
-    }else{
-        printf("Não deu.");
+    initBoard->f = initBoard->g + initBoard->h;   
+    
+    tNodeQueue *root = malloc(sizeof(tNodeQueue));
+    root->elem = initBoard;
+    root->ant = NULL;
+    root->next = NULL;
+    
+    int answer;
+    if (aStar(root,heuristica,&answer)){
+        printf("\nPara a entrada temos o resultado de %d\n\n",answer);
+    } else {
+        printf("\nNao ha resultado para esta entrada\n\n");
     }
-    printf("\n\n");
-    
-    if(moveLeft(m0,left,i,j)){
-        printMatrix(left);
-    }else{
-        printf("Não deu.");
-    }
-    
-    
-    
-/*
-    int j = 1;
-    memccpy(p,m0,-1,4*4*sizeof(int));
-    
-    printMatrix(m0);
-    printMatrix(p);
-    
-    int (*m)[4] = p;
-    
-    printf("\nElemento: %d\n\n",m[1][1]);
-    
-*/
-    
 
     return (EXIT_SUCCESS);
 }

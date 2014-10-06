@@ -34,14 +34,22 @@ typedef struct tQueue{
     int length;
 } tQueue;
 
+//Variaveis globais de peso
+double p1;
+double p2;
+double p3;
+
 /*
  * Definicoes do arquivo util.c
  */
-void printMatrix(int m[4][4]);
+void printMatrix(int m[LENMATRIX][LENMATRIX]);
  
 
 /*
  * Definicoes do arquivo heuristicas.c
  */
-int h1(int m[4][4]);
+int h1(int m[LENMATRIX][LENMATRIX]);
+int h2(int m[LENMATRIX][LENMATRIX]);
+int h3(int m[LENMATRIX][LENMATRIX]);
 
+int h5(int m[LENMATRIX][LENMATRIX]);
