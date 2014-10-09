@@ -1,32 +1,37 @@
 package astar;
 
-
 public class Node {
-    
-    private int g;
+
+    private int matrix[][];
+    private double g;
     private double h;
     private double f;
-    private Node pai;
-    private int tabuleiro[][];
+    private Node p;
 
-    public Node(int g, double h, double f, Node pai, int[][] tabuleiro) {
-        this.g = g;
-        this.h = h;
-        this.f = f;
-        this.pai = pai;
-        this.tabuleiro = tabuleiro;
-    }
-
-    
-    
     public Node() {
     }
 
-    public int getG() {
+    public Node(int[][] matrix, double g, double h, double f, Node p) {
+        this.matrix = matrix;
+        this.g = g;
+        this.h = h;
+        this.f = f;
+        this.p = p;
+    }
+
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(int[][] matrix) {
+        this.matrix = matrix;
+    }
+
+    public double getG() {
         return g;
     }
 
-    public void setG(int g) {
+    public void setG(double g) {
         this.g = g;
     }
 
@@ -42,34 +47,39 @@ public class Node {
         return f;
     }
 
-    public void setF(double f) {
-        this.f = f;
+    public Node getP() {
+        return p;
     }
 
-    public Node getPai() {
-        return pai;
+    public void setP(Node p) {
+        this.p = p;
     }
 
-    public void setPai(Node pai) {
-        this.pai = pai;
-    }
-
-    public int[][] getTabuleiro() {
-        return tabuleiro;
-    }
-
-    public void setTabuleiro(int[][] tabuleiro) {
-        this.tabuleiro = tabuleiro;
-    }
-
-    public void calculaF() {
+    public void calcF() {
         this.f = this.g + this.h;
     }
 
-    boolean isEstadoFinal() {
-        return h == 0;
+    public boolean isEstadoFinal() {
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int j = 0; j < this.matrix.length; j++) {
+                if (this.matrix[i][j] != (i + j * 4 + 1)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
-
+    
+    @Override
+    public String toString(){
+        String str = "";
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int j = 0; j < this.matrix.length; j++) {
+                str += this.matrix[i][j]+" ";
+            }
+        }
+        return str;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -79,10 +89,10 @@ public class Node {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Node other = (Node) obj;
-        for (int i = 0; i < tabuleiro.length; i++) {
-            for (int j = 0; j < tabuleiro.length; j++) {
-                if (tabuleiro[i][j]!=other.tabuleiro[i][j]){
+        final Node object = (Node) obj;
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int j = 0; j < this.matrix.length; j++) {
+                if (this.matrix[i][j] != object.matrix[i][j]) {
                     return false;
                 }
             }
@@ -90,5 +100,4 @@ public class Node {
         return true;
     }
 
-    
 }
